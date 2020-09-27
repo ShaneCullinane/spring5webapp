@@ -44,7 +44,14 @@ public class BootstrapData implements CommandLineRunner {
         Publisher cosmicTonesPublications = new Publisher("Cosmic Tones Publications", "", "", "", "");
         publisherRepository.save(cosmicTonesPublications);
 
+        cosmicTonesPublications.getBooks().add(noEJB);
+        noEJB.setPublisher(cosmicTonesPublications);
+
+        publisherRepository.save(cosmicTonesPublications);
+        bookRepository.save(noEJB);
+
         System.out.println("Started in bookstrap");
-        System.out.println("Added " + bookRepository.count() + " books and " + publisherRepository.count() + " publishers");
+        System.out.println("Added " + bookRepository.count() + " book(s) and " + publisherRepository.count() + " publisher(s)");
+        System.out.println(cosmicTonesPublications.getName() + " has " + cosmicTonesPublications.getBooks().size() + " book(s)");
     }
 }
